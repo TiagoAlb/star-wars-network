@@ -9,6 +9,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
 
 server:
+  port: $PORT
   servlet:
     context-path: /api
   error:

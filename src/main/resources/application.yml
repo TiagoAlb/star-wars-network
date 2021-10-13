@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     url: jdbc:h2:mem:starwarsdb
     driverClassName: org.h2.Driver
@@ -9,7 +11,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
 
 server:
-  port: $PORT
+  port: ${PORT:8080}
   servlet:
     context-path: /api
   error:

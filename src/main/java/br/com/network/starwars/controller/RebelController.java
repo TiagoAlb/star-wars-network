@@ -29,16 +29,13 @@ public class RebelController {
     @Autowired
     private RebelService service;
 
-    @Autowired
-    private MessageSource messages;
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public GenericResponse create(@Valid @RequestBody RebelVO obj) {
         RebelVO created = service.save(obj);
 
         created.add(linkTo(methodOn(RebelController.class).findById(created.getId())).withSelfRel());
-        return new GenericResponse(messages.getMessage("message.rebel.created", null, new Locale ("pt", "BR")), created);
+        return new GenericResponse("Rebelde cadastrado com sucesso!", created);
     }
 
     @PatchMapping(value = "/{id}/negotiations")
@@ -53,7 +50,7 @@ public class RebelController {
     public GenericResponse reportTraitor(@PathVariable("id") Long id, @Valid @RequestBody ReportDTO obj) throws Exception {
         Report created = service.saveReport(id, obj);
 
-        return new GenericResponse(messages.getMessage("message.rebel.reportTraitor", null, new Locale ("pt", "BR")), created);
+        return new GenericResponse("Traidor reportado com sucesso!", created);
     }
 
     @PatchMapping(value = "/{id}/location")
@@ -61,7 +58,7 @@ public class RebelController {
     public GenericResponse updateLocation(@PathVariable("id") Long id, @Valid @RequestBody LocationVO obj) {
         LocationVO created = service.saveLocation(id, obj);
 
-        return new GenericResponse(messages.getMessage("message.rebel.locationUpdated", null, new Locale ("pt", "BR")), created);
+        return new GenericResponse("Localizacao alterada com sucesso!", created);
     }
 
     @GetMapping(value = "/{id}")

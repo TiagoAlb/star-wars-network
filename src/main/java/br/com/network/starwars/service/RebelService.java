@@ -26,9 +26,6 @@ public class RebelService implements IRebelService {
     @Autowired
     private ReportRepository reportRepository;
 
-    @Autowired
-    private MessageSource messages;
-
     @Override
     public RebelVO save(RebelVO obj) {
         obj.setId(0L);
@@ -39,7 +36,7 @@ public class RebelService implements IRebelService {
     public Rebel find(Long id) {
         var entity = rebelRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        messages.getMessage("message.notFound.id", null, new Locale ("pt", "BR"))
+                        "Nenhum resultado foi encontrado para este ID!"
                 ));
         return entity;
     }
@@ -62,7 +59,7 @@ public class RebelService implements IRebelService {
                 .collect(Collectors.toList()).size() > 0;
 
         if(reported) {
-            throw new Exception(messages.getMessage("message.rebel.reported", null, new Locale ("pt", "BR")));
+            throw new Exception("Você já reportou este traidor!");
         }
 
         traitor.getReports().add(new Report(x9, traitor));
@@ -86,6 +83,6 @@ public class RebelService implements IRebelService {
         rebelRepository.save(buyer);
         rebelRepository.save(seller);
 
-        return messages.getMessage("message.rebel.negociation", null, new Locale ("pt", "BR"));
+        return "Negociação realizada com sucesso!";
     }
 }

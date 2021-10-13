@@ -18,9 +18,6 @@ public class StatisticService {
     @Autowired
     private RebelRepository rebelRepository;
 
-    @Autowired
-    private MessageSource messages;
-
     public TraitorStatisticDTO countTraitors() {
         return rebelRepository.countTraitors();
     }

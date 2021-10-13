@@ -39,7 +39,7 @@ public class RebelService implements IRebelService {
     public Rebel find(Long id) {
         var entity = rebelRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        messages.getMessage("message.notFound.id", null, Locale.getDefault())
+                        messages.getMessage("message.notFound.id", null, new Locale ("pt", "BR"))
                 ));
         return entity;
     }
@@ -62,7 +62,7 @@ public class RebelService implements IRebelService {
                 .collect(Collectors.toList()).size() > 0;
 
         if(reported) {
-            throw new Exception(messages.getMessage("message.rebel.reported", null, Locale.getDefault()));
+            throw new Exception(messages.getMessage("message.rebel.reported", null, new Locale ("pt", "BR")));
         }
 
         traitor.getReports().add(new Report(x9, traitor));
@@ -86,6 +86,6 @@ public class RebelService implements IRebelService {
         rebelRepository.save(buyer);
         rebelRepository.save(seller);
 
-        return messages.getMessage("message.rebel.negociation", null, Locale.getDefault());
+        return messages.getMessage("message.rebel.negociation", null, new Locale ("pt", "BR"));
     }
 }

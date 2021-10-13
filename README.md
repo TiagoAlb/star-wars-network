@@ -130,4 +130,5 @@ Retorno:
 ```
 
 O arquivo JSON com todas as requisições de exemplo pode ser encontrado no seguinte link: https://drive.google.com/file/d/1mN93WzJtQqNyACbqG1ozr-EgAb_QkZj3/view?usp=sharing
+
 Para utilizar é necessário realizar a importação do arquivo da collection no postman ou outro programa semelhante.

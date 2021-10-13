@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +39,7 @@ public class RebelService implements IRebelService {
     public Rebel find(Long id) {
         var entity = rebelRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        messages.getMessage("message.notFound.id", null, null)
+                        messages.getMessage("message.notFound.id", null, Locale.getDefault())
                 ));
         return entity;
     }
@@ -61,7 +62,7 @@ public class RebelService implements IRebelService {
                 .collect(Collectors.toList()).size() > 0;
 
         if(reported) {
-            throw new Exception(messages.getMessage("message.rebel.reported", null, null));
+            throw new Exception(messages.getMessage("message.rebel.reported", null, Locale.getDefault()));
         }
 
         traitor.getReports().add(new Report(x9, traitor));
@@ -85,6 +86,6 @@ public class RebelService implements IRebelService {
         rebelRepository.save(buyer);
         rebelRepository.save(seller);
 
-        return messages.getMessage("message.rebel.negociation", null, null);
+        return messages.getMessage("message.rebel.negociation", null, Locale.getDefault());
     }
 }
